@@ -1,17 +1,28 @@
 <template>
   <div class="login-page">
-
+ 
      <div class="login-card">
         <div class="text-center">
             <img src="/img/lock.png" class="login-card__icon"/>
             <h2>User Login</h2>
         </div>
-        <form >
+        <form action="#" @submit.prevent="handleSubmit">
             <label class="block mt-3">Email</label>
-            <input type="text" placeholder="Enter Email"/>
+            <input 
+               type="email" 
+               placeholder="Enter Email"
+               v-model="formData.email"
+               ref="email"
+               
+              />
             <br>
              <label  class="block mt-3">password</label>
-             <input type="text" placeholder="Enter Password"/>
+             <input 
+                   type="password"
+                   placeholder="Enter Password"
+                   v-model="formData.password"
+                   ref="password"
+                    />
              <button type="submit" class="w-100 mt-3">submit</button>
 
              <div class="d-flex jc-between mt-3">
@@ -31,6 +42,44 @@
 </template>
 
 <script>
+
+export default{
+    data:()=>({
+        formData:{
+            email:'',
+            password:''
+
+
+        }
+    }),
+    methods:{
+
+        handleSubmit(){
+             console.log(this.formData);
+             if(!this.formData.email){
+                //alert('Email can not be emty');
+                //TOdo :show error message toast
+                this.$eventBus.emit('toast',{
+                    type:'Error',
+                    message:'Email Can not Empty'
+                });
+                this.$refs.email.focus();
+               
+                return;
+             }
+             if(this.formData.password.length <6){
+               // alert('Password  at least 6 chareacter');
+               this.$eventBus.emit('toast',{
+                   type:'Error',
+                   message:'Password  at least 6 chareacter'
+               });
+               this.$refs.password.focus();
+                return;
+             }
+        }
+    },
+    
+}
 </script>
 
 <style>
