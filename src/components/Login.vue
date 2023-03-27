@@ -2,6 +2,9 @@
   <div class="login-page">
  
      <div class="login-card">
+      <div class="box1">
+
+      </div>
         <div class="text-center">
             <img src="/img/lock.png" class="login-card__icon"/>
             <h2>User Login</h2>
